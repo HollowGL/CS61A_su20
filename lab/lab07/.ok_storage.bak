@@ -1,1 +1,7 @@
 'subseqs-correct', (0, 66)
+'trade-correct', (512, 66)
+'reverse-correct', (1024, 66)
+'make_advanced_counter_maker-correct', (1536, 66)
+'inc_subseqs-correct', (2048, 66)
+'make_glookup-correct', (2560, 66)
+'num_trees-correct', (3072, 66)
