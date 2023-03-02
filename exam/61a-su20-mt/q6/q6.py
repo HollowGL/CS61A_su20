@@ -29,15 +29,18 @@ def copycat(lst1, lst2):
     >>> copycat(['a', 'b', 'c'], [1, -1, 3])
     ['c', 'c', 'c']
     """
-    def copycat_helper(______, ______, ______):
-        if ______:
-            return ______
-        if ______:
-            ______ = ______
+    def copycat_helper(new, res, index):
+        if len(lst1[index:]) == 0 or len(lst2[index:]) == 0:
+            return res
+        if lst2[index] >= 0:
+            new = [lst1[index]] * lst2[index]
         else:
-            ______ = ______[:______]
-        return ______
-    return ______
+            res = res[:lst2[index] - 1]
+        return copycat_helper([], res + new, index+1)
+    return copycat_helper([], [], 0)
+    # I think the first arguement 'new' of helper function could be ignored. 
+    # But however, this would lead to error when 'new' haven't been associated with a value.
+
 
 # ORIGINAL SKELETON FOLLOWS
 
