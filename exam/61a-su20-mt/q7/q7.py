@@ -50,18 +50,24 @@ def village(apple, t):
           31
           32
     """
-    def graft(t, bs):
-        """
-        Grafts the given branches `bs` onto each leaf
-        of the given tree `t`, returning a new tree.
-        """
-        if ______:
-            return ______
-        new_branches = ______
-        return tree(______, ______)
-    base_t = ______
-    bs = ______
-    return graft(base_t, bs)
+    # def graft(t, bs):
+    #     """
+    #     Grafts the given branches `bs` onto each leaf
+    #     of the given tree `t`, returning a new tree.
+    #     """
+    #     if ______:
+    #         return ______
+    #     new_branches = ______
+    #     return tree(______, ______)
+    # base_t = ______
+    # bs = ______
+    # return graft(base_t, bs)
+
+    def apple_helper(apple, t):
+        if is_leaf(t):
+            return apple(label(t))
+        return tree(label(t), [apple_helper(apple, b) for b in branches(t)])
+    return apple_helper(apple, t)
 
 def tree(label, branches=[]):
     """Construct a tree with the given label value and a list of branches."""
