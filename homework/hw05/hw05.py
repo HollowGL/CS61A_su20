@@ -135,7 +135,27 @@ def merge(incr_a, incr_b):
     iter_a, iter_b = iter(incr_a), iter(incr_b)
     next_a, next_b = next(iter_a, None), next(iter_b, None)
     "*** YOUR CODE HERE ***"
-
+    while next_a != None or next_b != None:
+        if next_a == None:
+            yield next_b
+            next_b = next(iter_b, None)
+            continue
+        elif next_b == None:
+            yield next_a 
+            next_a = next(iter_a, None) 
+            continue
+        if next_a < next_b:
+            yield next_a
+            next_a = next(iter_a, None)
+            continue
+        elif next_a > next_b:
+            yield next_b
+            next_b = next(iter_b, None)
+            continue
+        else:
+            yield next_a
+            next_a, next_b = next(iter_a, None), next(iter_b, None)
+            continue
 
 def make_joint(withdraw, old_pass, new_pass):
     """Return a password-protected withdraw function that has joint access to
@@ -176,6 +196,13 @@ def make_joint(withdraw, old_pass, new_pass):
     "Too many incorrect attempts. Attempts: ['my', 'secret', 'password']"
     """
     "*** YOUR CODE HERE ***"
+    check = withdraw(0, old_pass)
+    if type(check) == str:
+        return check
+    def joint_withdraw(amount, password):
+        nonlocal old_pass, new_pass
+        return withdraw(amount, old_pass if password == new_pass else password)
+    return joint_withdraw
 
 
 def remainders_generator(m):
