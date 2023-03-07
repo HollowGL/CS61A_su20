@@ -237,6 +237,13 @@ def remainders_generator(m):
     11
     """
     "*** YOUR CODE HERE ***"
+    def inner(n):
+        ntu = naturals()
+        n = 4 if n == 0 else n
+        while 1:
+            yield next(ntu) * m - m + n
+    for i in range(m):
+        yield inner(i)
 
 
 def naturals():
