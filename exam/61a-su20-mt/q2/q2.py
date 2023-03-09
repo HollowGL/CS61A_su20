@@ -49,6 +49,7 @@ def schedule(galaxy, sum_to, max_digit):
             modified_galaxy = galaxy[:index] + str(x) + galaxy[index + 1:]
             ans += schedule_helper(modified_galaxy, sum_sofar + x, index + 1)
         return ans
+    return schedule_helper(galaxy, 0, 0)
 
 # ORIGINAL SKELETON FOLLOWS
 
