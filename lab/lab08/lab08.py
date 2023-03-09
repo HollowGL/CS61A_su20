@@ -33,4 +33,11 @@ def make_generators_generator(g):
     9
     """
     "*** YOUR CODE HERE ***"
-
+    def gen_helper(n):
+        gen = g()
+        for _ in range(n):
+            yield next(gen)
+    i = 1
+    for _ in g():
+        yield gen_helper(i)
+        i += 1
