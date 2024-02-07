@@ -8,6 +8,17 @@ def convert_link(link):
     []
     """
     "*** YOUR CODE HERE ***"
+    # iterative
+    res = []
+    while link is not Link.empty:
+        res = res + [link.first]
+        link = link.rest
+    return res
+    
+    # recursive
+    if link is Link.empty:
+        return []
+    return [link.first] + convert_link(link.rest) 
 
 
 def every_other(s):
@@ -28,6 +39,9 @@ def every_other(s):
     Link(4)
     """
     "*** YOUR CODE HERE ***"
+    while s and s.rest is not Link.empty:
+        s.rest = s.rest.rest
+        s = s.rest
 
 
 def label_squarer(t):
@@ -39,6 +53,7 @@ def label_squarer(t):
     Tree(1, [Tree(9, [Tree(25)]), Tree(49)])
     """
     "*** YOUR CODE HERE ***"
+    t.map(lambda x: x ** 2)
 
 
 def cumulative_mul(t):
@@ -51,6 +66,11 @@ def cumulative_mul(t):
     Tree(105, [Tree(15, [Tree(5)]), Tree(7)])
     """
     "*** YOUR CODE HERE ***"
+    a = 1
+    for b in t.branches:
+        cumulative_mul(b)
+        a *= b.label
+    t.label *= a
 
 
 def has_cycle(link):
@@ -68,6 +88,17 @@ def has_cycle(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    if link is Link.empty:
+        return False
+    p = link
+    q = link
+    while q and q.rest:
+        p = p.rest
+        q = q.rest.rest
+        if p is q:
+            return True
+    return False
+
 
 def has_cycle_constant(link):
     """Return whether link contains a cycle.
@@ -81,6 +112,7 @@ def has_cycle_constant(link):
     False
     """
     "*** YOUR CODE HERE ***"
+    return has_cycle(link)
 
 
 def reverse_other(t):
@@ -97,6 +129,15 @@ def reverse_other(t):
     Tree(1, [Tree(8, [Tree(3, [Tree(5), Tree(4)]), Tree(6, [Tree(7)])]), Tree(2)])
     """
     "*** YOUR CODE HERE ***"
+    # t is on even-depth
+    labels = [b1.label for b1 in t.branches]
+    for i, b1 in enumerate(t.branches):
+        # b1 is on odd-depth
+        b1.label = labels[len(labels) - 1 - i]
+        for b2 in b1.branches:
+            # b2 is on even-depth
+            reverse_other(b2)
+
 
 
 class Link:
